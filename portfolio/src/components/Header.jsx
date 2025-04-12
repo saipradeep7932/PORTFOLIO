@@ -13,12 +13,7 @@ export default function Header() {
     visible: { 
       y: 0, 
       opacity: 1,
-      transition: { 
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
-        duration: 0.6
-      }
+      transition: { type: 'spring', stiffness: 100, damping: 20, duration: 0.6 }
     }
   };
 
@@ -28,11 +23,7 @@ export default function Header() {
     visible: { 
       x: 0, 
       opacity: 1,
-      transition: { 
-        type: 'spring',
-        stiffness: 100,
-        delay: 0.2
-      }
+      transition: { type: 'spring', stiffness: 100, delay: 0.2 }
     }
   };
 
@@ -42,14 +33,7 @@ export default function Header() {
     visible: { 
       x: 0, 
       opacity: 1,
-      transition: { 
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-        delay: 0.3,
-        when: "beforeChildren",
-        staggerChildren: 0.1
-      }
+      transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.3, when: "beforeChildren", staggerChildren: 0.1 }
     }
   };
 
@@ -59,14 +43,15 @@ export default function Header() {
     visible: { 
       y: 0, 
       opacity: 1,
-      transition: { 
-        type: 'spring',
-        stiffness: 300
-      }
+      transition: { type: 'spring', stiffness: 300 }
     },
     hover: { 
-      scale: 1.1, 
+      scale: 1.1,
       color: "#7e22ce", // purple-700
+      backgroundColor: "rgba(0, 0, 0, 0.9)", // Black background for highlight
+      borderRadius: "3px", // Small rectangle effect
+      padding: "4px 8px",
+      boxShadow: "inset 0px 2px 6px rgba(126, 34, 206, 0.6), 0px 0px 0px 1px black", // Inner colored shadow + thin black border
       transition: { duration: 0.2 }
     }
   };
@@ -87,7 +72,7 @@ export default function Header() {
           Sai Pradeep's Personal Portfolio
         </motion.h1>
 
-        {/* Right: Boxed nav with one rounded edge */}
+        {/* Right: Boxed Navigation */}
         <motion.div 
           className="bg-white text-gray-900 rounded-bl-2xl px-6 py-3 shadow-sm hover:shadow-md transition-shadow duration-300"
           variants={navContainerVariants}
@@ -97,13 +82,13 @@ export default function Header() {
               { name: "About", href: "#about" },
               { name: "Skills", href: "#skills" },
               { name: "Resume", href: "#resume" },
-              { name: "Portfolio", href: "#portfolio" },
+              { name: "Project", href: "#portfolio" },
               { name: "Contact", href: "#contact" },
             ].map((item, i) => (
               <motion.li key={i} variants={linkItemVariants}>
                 <motion.a
                   href={item.href}
-                  className="text-sm font-medium transition-colors"
+                  className="text-sm font-medium transition-colors px-3 py-1 rounded-md"
                   whileHover="hover"
                 >
                   {item.name}
@@ -116,7 +101,7 @@ export default function Header() {
               <motion.a
                 href="#"
                 onClick={toggleChat}
-                className="text-sm font-medium transition-colors"
+                className="text-sm font-medium transition-colors px-3 py-1 rounded-md"
                 whileHover="hover"
               >
                 Chat
@@ -125,6 +110,11 @@ export default function Header() {
           </ul>
         </motion.div>
       </nav>
+
+      {/* Inline CSS without the jsx attribute */}
+      <style>{`
+        /* No custom styles here for Header, but if you need them, add them normally */
+      `}</style>
     </motion.header>
   );
 }
