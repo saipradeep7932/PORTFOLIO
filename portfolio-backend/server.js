@@ -3,15 +3,16 @@ const cors = require("cors");
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
 const axios = require("axios");
+require("dotenv").config(); // Load .env variables
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Load and parse the resume PDF
-const pdfPath = "C:/Users/saipr/Downloads/portfolio/portfolio/resume.pdf";
+const pdfPath = process.env.PDF_PATH;
 let resumeText = "";
 
+// Load and parse the resume PDF
 fs.readFile(pdfPath, async (err, data) => {
   if (err) {
     console.error("Error reading PDF:", err);
@@ -25,7 +26,6 @@ fs.readFile(pdfPath, async (err, data) => {
   }
 });
 
-// POST endpoint
 app.post("/ask", async (req, res) => {
   const question = req.body.question;
 
@@ -44,15 +44,15 @@ Answer:
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "deepseek-r1-distill-qwen-32b",
+        model: process.env.GROQ_MODEL,
         messages: [{ role: "user", content: prompt }],
-        temperature: 0
+        temperature: 0,
       },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`
-        }
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+        },
       }
     );
 
@@ -66,8 +66,7 @@ Answer:
   }
 });
 
-// Start the server
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
