@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+html{
+  scroll-behavior: smooth;
+}
+
+@keyframes slide-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slide-loop {
+  animation: slide-loop 30s linear infinite;
+}

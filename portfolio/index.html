@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Placeholder favicon, will be replaced after rotation -->
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" id="favicon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal_Portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- 🔄 Rotate favicon -90deg only once -->
+    <script>
+      const link = document.getElementById('favicon');
+      const img = new Image();
+      img.src = '/logo.svg'; // Make sure logo.svg is in /public
+
+      img.onload = () => {
+        const size = 64;
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        // Rotate -90 degrees
+        ctx.translate(0, size);
+        ctx.rotate(-90 * Math.PI / 180);
+        ctx.drawImage(img, 0, 0, size, size);
+
+        // Replace favicon with rotated version
+        link.href = canvas.toDataURL('image/png');
+      };
+    </script>
+  </body>
+</html>
